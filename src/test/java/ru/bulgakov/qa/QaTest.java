@@ -1,7 +1,12 @@
 package ru.bulgakov.qa;
 
 import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.bulgakov.pages.LavaTopPayingPage;
+import ru.bulgakov.pages.YandexSearchPage;
+import ru.bulgakov.pages.YandexSearchResultsPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -10,23 +15,21 @@ import static com.codeborne.selenide.Selenide.*;
 public class QaTest {
 
     @Test
-    void mentoringPriceShouldBe4700Test() {
+    @DisplayName("Проверить, что цена обучения 47000.00 рублей")
+    @Tag("POSITIVE")
+    void mentoringPriceShouldBe47000Test() {
+        LavaTopPayingPage lavaTopPayingPage = new LavaTopPayingPage();
 
-        open("https://ya.ru/");
-        $("#text").setValue("bulgakov qa");
-        $("[type=submit]").click();
-        $(".DistributionButtonClose").click();
-        $(byText("ivanbulgakovqa.ru")).click();
-        sleep(5000);
-        switchTo().window(1);
+        open("https://ya.ru/", YandexSearchPage.class)
+                .search("bulgakov qa")
+                .submit()
+                .closeDefaultBrowserSelectionPage()
+                .openLink("ivanbulgakovqa.ru")
+                .clickPrice()
+                .clickButton("Хочу вкатиться в QA")
+                .clickButton("Бегу оплачивать");
 
-        $$(".t-menu__list li").last().click();
-        $(byText("Хочу вкатиться в QA")).click();
-        $(byText("Бегу оплачивать")).click();
-        sleep(5000);
-
-        switchTo().window(2);
-        $(".styles-module-scss-module__kWKzya__price").shouldBe(text("47 000.00"));
+        lavaTopPayingPage.checkPrice("47 000.00");
     }
 
     @Test
