@@ -47,6 +47,6 @@ public class QaTest {
                 .chooseDateOnTheTable("12","February", "1980")
                 .clickSubmitButton()
                 .checkRegistrationSuccessModalTableVisible()
-                .checkFieldsSavedCorrecly(firstName, lastName);
+                .checkFullNameSavedCorrecly(firstName, lastName);
     }
 }

@@ -64,7 +64,7 @@ public class DemoQaRegistrationPage {
         return this;
     }
 
-    public DemoQaRegistrationPage checkFieldsSavedCorrecly(String firstName, String lastName) {
+    public DemoQaRegistrationPage checkFullNameSavedCorrecly(String firstName, String lastName) {
         studentNameField.shouldHave(exactText(firstName + " " + lastName));
         return this;
     }
