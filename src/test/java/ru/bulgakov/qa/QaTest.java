@@ -7,7 +7,6 @@ import ru.bulgakov.pages.DemoQaRegistrationPage;
 import ru.bulgakov.pages.LavaTopPayingPage;
 import ru.bulgakov.pages.YandexSearchPage;
 
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class QaTest {
@@ -39,14 +38,14 @@ public class QaTest {
 
         open("https://demoqa.com/automation-practice-form", DemoQaRegistrationPage.class)
                 .registrationFormIsVisible()
-                .setFieldById("firstName", firstName)
-                .setFieldById("lastName", lastName)
-                .setFieldById("userNumber", phoneNumber)
-                .setRadioButtonByValue("Male")
-                .clickDateOfBirthField()
-                .chooseDateOnTheTable("12","February", "1980")
-                .clickSubmitButton()
-                .checkRegistrationSuccessModalTableVisible()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setPhoneNumber(phoneNumber)
+                .setGenderMale()
+                .dateOfBirth()
+                .chooseDate("12","February", "1980")
+                .submit()
+                .verifyInformationTableApeared()
                 .checkFullNameSavedCorrecly(firstName, lastName);
     }
 }

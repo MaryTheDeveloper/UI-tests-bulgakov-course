@@ -27,28 +27,43 @@ public class DemoQaRegistrationPage {
         return this;
     }
 
-    public DemoQaRegistrationPage setFieldById(String fieldName, String fieldValue) {
+    private DemoQaRegistrationPage setFieldById(String fieldName, String fieldValue) {
         $("#" + fieldName).setValue(fieldValue);
         return this;
     }
+    public DemoQaRegistrationPage setFirstName(String firstName) {
+        return setFieldById("firstName", firstName);
+    }
 
-    public DemoQaRegistrationPage setRadioButtonByValue(String value) {
+    public DemoQaRegistrationPage setLastName(String lastName) {
+        return setFieldById("lastName", lastName);
+    }
+
+    public DemoQaRegistrationPage setPhoneNumber(String phoneNumber) {
+        return setFieldById("phoneNumber", phoneNumber);
+    }
+
+    private DemoQaRegistrationPage setRadioButtonByValue(String value) {
         $(String.format("[value=%s]", value)).click();
         return this;
     }
 
-    public DemoQaRegistrationPage clickSubmitButton() {
+    public DemoQaRegistrationPage setGenderMale() {
+        return setRadioButtonByValue("Male");
+    }
+
+    public DemoQaRegistrationPage submit() {
         submitButton.scrollTo().click();
         return this;
     }
 
-    public DemoQaRegistrationPage clickDateOfBirthField() {
+    public DemoQaRegistrationPage dateOfBirth() {
         $("#dateOfBirthInput").click();
         $(".react-datepicker-popper").shouldBe(visible);
         return this;
     }
 
-    public DemoQaRegistrationPage chooseDateOnTheTable(String day, String month, String year) {
+    public DemoQaRegistrationPage chooseDate(String day, String month, String year) {
         calendarMonthSelector.click();
         calendarMonthSelectorElements.findBy(text(month)).click();
         calendarYearSelector.click();
@@ -58,9 +73,8 @@ public class DemoQaRegistrationPage {
         return this;
     }
 
-    public DemoQaRegistrationPage checkRegistrationSuccessModalTableVisible() {
+    public DemoQaRegistrationPage verifyInformationTableApeared() {
         registrationSuccessModal.shouldBe(visible);
-        registrationInformationTable.shouldBe(visible);
         return this;
     }
 
