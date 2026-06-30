@@ -15,7 +15,16 @@ public class WelcomePage {
         return this;
     }
 
-    public WelcomePage clickButton(String buttonText) {
+    public WelcomePage wannaBeQA() {
+        return clickButton("Хочу вкатиться в QA");
+    }
+
+    public LavaTopPayingPage readyToPay() {
+        clickButton("Бегу оплачивать");
+        return new LavaTopPayingPage();
+    }
+
+    private WelcomePage clickButton(String buttonText) {
         $(byText(buttonText)).click();
         return this;
     }
