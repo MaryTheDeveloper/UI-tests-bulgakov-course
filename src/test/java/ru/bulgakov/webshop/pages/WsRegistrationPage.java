@@ -20,6 +20,18 @@ public class WsRegistrationPage {
     private final SelenideElement resultText = $("div.result");
     private final ElementsCollection headerLinks = $$("div.header-links ul li a");
 
+    public WsRegistrationPage register(String firstName, String lastName, String email, String password) {
+        selectMaleGender()
+                .enterFirstName(firstName)
+                .enterLastName(lastName)
+                .enterEmail(email)
+                .enterPassword(password)
+                .enterConfirmPassword(password)
+                .submitRegistration()
+                .checkRegistrationCompleted();
+        return this;
+    }
+
     public WsRegistrationPage verifyRegistrationOpen() {
         registrationTitle.shouldHave(text("Register"));
         return this;
@@ -63,7 +75,7 @@ public class WsRegistrationPage {
         resultText.shouldHave(text("Your registration completed"));
         return this;
     }
-    public WsRegistrationPage checkEmailIsShown(String email) {
+    public WsRegistrationPage checkUserLoggedIn(String email) {
         headerLinks.get(0).shouldHave(text(email));
         return this;
     }

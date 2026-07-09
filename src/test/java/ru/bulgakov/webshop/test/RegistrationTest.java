@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import ru.bulgakov.webshop.pages.WsWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
 public class RegistrationTest {
     private static final Faker faker = new Faker();
@@ -14,7 +15,7 @@ public class RegistrationTest {
         String password = faker.harryPotter().character() + faker.number().positive();
         String email = faker.internet().emailAddress();
 
-        open("https://demowebshop.tricentis.com/register", WsWelcomePage.class)
+        open(WEB_SHOP_URL, WsWelcomePage.class)
                 .openRegistration()
                 .verifyRegistrationOpen()
                 .selectMaleGender()
@@ -25,6 +26,6 @@ public class RegistrationTest {
                 .enterConfirmPassword(password)
                 .submitRegistration()
                 .checkRegistrationCompleted()
-                .checkEmailIsShown(email);
+                .checkUserLoggedIn(email);
     }
 }
