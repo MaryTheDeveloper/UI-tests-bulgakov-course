@@ -3,10 +3,13 @@ package ru.bulgakov.webshop.test;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.bulgakov.webshop.pages.WsProductCartPage;
+import ru.bulgakov.webshop.pages.WsWelcomePage;
 import ru.bulgakov.webshop.steps.AuthSteps;
 
+import java.util.Locale;
+
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
@@ -21,26 +24,27 @@ public class CartTest {
 
     @Test
     void addToCardTest() {
-        open(WEB_SHOP_URL);
+        String itemQty = "2";
+        WsProductCartPage wsProductCartPage = new WsProductCartPage();
 
-        $$("ul.top-menu li a").get(1).hover();
-        $(byText("Desktops")).click();
-        $$("div.product-grid div").get(0).click();
+        open(WEB_SHOP_URL, WsWelcomePage.class)
+                .selectComputers()
+                .selectDesktops()
+                .selectItemByIndex(0)
+                .selectSlowProcessor()
+                .inputQtyValue(itemQty)
+                .addToCart()
+                .successNotificationAppeared()
+                .cartQtyIsCorrect(itemQty);
 
-        String itemName = $("[itemprop=name]").getText();
-        String itemPrice = $("[itemprop=price]").getText();
-        String itemQuantity = "2";
+        String itemName = wsProductCartPage.getItemName();
+        String itemPrice = wsProductCartPage.getItemPrice();
 
-        $$("dl dd ul li").get(0).$$("li input").get(0).click();
-        $("input.qty-input").setValue(itemQuantity);
-        $("input.add-to-cart-button").click();
-        $("div.bar-notification.success").shouldBe(visible);
-        $("span.cart-qty").shouldHave(text("(" + itemQuantity + ")"));
-        $("a.ico-cart").click();
-
-        $("a.product-name").shouldHave(text(itemName));
-        $("input.qty-input").shouldHave(value(itemQuantity));
-        $("span.product-subtotal").shouldHave(text(String.valueOf(
-                Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity))));
+        wsProductCartPage
+                .openShoppingCart()
+                .correctItemName(itemName)
+                .correctQty(itemQty)
+                .correctSubtotal(String.format(Locale.US, "%.2f",
+                        Float.parseFloat(itemPrice) * Float.parseFloat(itemQty)));
     }
 }

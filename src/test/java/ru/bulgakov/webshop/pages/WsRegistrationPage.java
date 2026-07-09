@@ -15,7 +15,7 @@ public class WsRegistrationPage {
     private final SelenideElement lastNameInput = $("input#LastName");
     private final SelenideElement emailInput = $("input#Email");
     private final SelenideElement passwordInput = $("input#Password");
-    private final SelenideElement confirmPasswordInput = $("input#Email");
+    private final SelenideElement confirmPasswordInput = $("input#ConfirmPassword");
     private final SelenideElement submitRegistrationButton = $("input#register-button");
     private final SelenideElement resultText = $("div.result");
     private final ElementsCollection headerLinks = $$("div.header-links ul li a");
