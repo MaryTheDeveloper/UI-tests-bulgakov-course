@@ -23,7 +23,7 @@ public class CartTest {
 
     @Test
     void addToCardTest() {
-        String itemQty = "2";
+        String itemQuantity = "2";
         int processorIndex = 0;
         WsProductCartPage wsProductCartPage = new WsProductCartPage();
 
@@ -32,10 +32,10 @@ public class CartTest {
                 .selectDesktops()
                 .selectItemByIndex(0)
                 .selectProcessor(processorIndex)
-                .inputQtyValue(itemQty)
+                .setQuantity(itemQuantity)
                 .addToCart()
                 .successNotificationAppeared()
-                .cartQtyIsCorrect(itemQty);
+                .cartQuantityIsCorrect(itemQuantity);
 
         String itemName = wsProductCartPage.getItemName();
         String itemPrice = wsProductCartPage.getItemPrice();
@@ -43,8 +43,8 @@ public class CartTest {
         wsProductCartPage
                 .openShoppingCart()
                 .correctItemName(itemName)
-                .correctQty(itemQty)
+                .correctQuantity(itemQuantity)
                 .correctSubtotal(String.format(Locale.US, "%.2f",
-                        Float.parseFloat(itemPrice) * Float.parseFloat(itemQty)));
+                        Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity)));
     }
 }

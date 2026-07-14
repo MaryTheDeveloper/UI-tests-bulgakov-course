@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class WsProductCartPage extends BasePage{
 
     private final ElementsCollection optionList = $$("dl dd ul li");
-    private final SelenideElement qtyInput = $("input.qty-input");
+    private final SelenideElement quantityInput = $("input.qty-input");
     private final SelenideElement addToCartButton = $("input.add-to-cart-button");
     private final SelenideElement successNotification = $("div.bar-notification.success");
     private final SelenideElement itemName = $("[itemprop=name]");
@@ -21,8 +21,8 @@ public class WsProductCartPage extends BasePage{
         return this;
     }
 
-    public WsProductCartPage inputQtyValue(String qty) {
-        qtyInput.setValue(qty);
+    public WsProductCartPage setQuantity(String quantity) {
+        quantityInput.setValue(quantity);
         return this;
     }
 

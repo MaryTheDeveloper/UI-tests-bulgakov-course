@@ -12,7 +12,7 @@ public class BasePage {
 
     private final ElementsCollection topMenu = $$("ul.top-menu li a");
     private final SelenideElement submenuDesktops = $(byText("Desktops"));
-    private final SelenideElement cartQty = $("span.cart-qty");
+    private final SelenideElement cartQuantity = $("span.cart-qty");
     private final SelenideElement cartHeaderLink = $("a.ico-cart");
 
     public BasePage selectComputers() {
@@ -25,8 +25,8 @@ public class BasePage {
         return new WsCategoryPage();
     }
 
-    public void cartQtyIsCorrect(String itemQuantity) {
-        cartQty.shouldHave(text("(" + itemQuantity + ")"));
+    public void cartQuantityIsCorrect(String itemQuantity) {
+        cartQuantity.shouldHave(text("(" + itemQuantity + ")"));
     }
 
     public WsShoppingCartPage openShoppingCart() {

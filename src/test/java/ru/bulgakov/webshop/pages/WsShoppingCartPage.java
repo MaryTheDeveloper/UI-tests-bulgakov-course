@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class WsShoppingCartPage {
 
     private final SelenideElement productName = $("a.product-name");
-    private final SelenideElement qtyInput = $("input.qty-input");
+    private final SelenideElement QuantityInput = $("input.qty-input");
     private final SelenideElement subtotal = $("span.product-subtotal");
 
     public WsShoppingCartPage correctItemName(String itemName) {
@@ -17,8 +17,8 @@ public class WsShoppingCartPage {
         return this;
     }
 
-    public WsShoppingCartPage correctQty(String itemQty) {
-        qtyInput.shouldHave(value(itemQty));
+    public WsShoppingCartPage correctQuantity(String itemQuantity) {
+        QuantityInput.shouldHave(value(itemQuantity));
         return this;
     }
 
