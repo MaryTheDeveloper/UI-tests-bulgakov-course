@@ -4,6 +4,7 @@ import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.bulgakov.webshop.pages.WsProductCartPage;
+import ru.bulgakov.webshop.pages.WsShoppingCartPage;
 import ru.bulgakov.webshop.pages.WsWelcomePage;
 import ru.bulgakov.webshop.steps.AuthSteps;
 
@@ -27,7 +28,8 @@ public class CartTest {
     void addToCardTest() {
         String itemQuantity = "2";
         int processorIndex = 0;
-        WsProductCartPage cartPage = new WsProductCartPage();
+        WsProductCartPage productCartPage = new WsProductCartPage();
+        WsShoppingCartPage shoppingCartPage = new WsShoppingCartPage();
 
         open(WEB_SHOP_URL, WsWelcomePage.class)
                 .selectComputers()
@@ -37,22 +39,20 @@ public class CartTest {
                 .setQuantity(itemQuantity)
                 .addToCart()
                 .successNotificationAppeared()
-                .cartQuantityIsCorrect(itemQuantity);
+                .verifyCartQuantity(itemQuantity);
 
-        String itemName = cartPage.getItemName();
-        String expectedTotal = cartPage.getSubtotal();
+        String itemName = productCartPage.getItemName();
+        String itemPrice = productCartPage.getProductPrice();
+        float processorPrice = productCartPage.getProcessorPrice(processorIndex);
+        String expectedTotal = String.format(Locale.US, "%.2f",
+                (Float.parseFloat(itemPrice) + processorPrice) * Float.parseFloat(itemQuantity));
+
+        productCartPage.openShoppingCart();
 
         assertAll(
-                () -> assertEquals(itemName, cartPage.getItemName()),
-                () -> assertEquals(expectedTotal, cartPage.getSubtotal()),
-                () -> assertEquals(itemQuantity, cartPage.getQuantity())
+                () -> assertEquals(itemName, shoppingCartPage.getItemName()),
+                () -> assertEquals(expectedTotal, shoppingCartPage.getSubtotal()),
+                () -> assertEquals(itemQuantity, shoppingCartPage.getQuantity())
         );
-
-        cartPage
-                .openShoppingCart()
-                .correctItemName(itemName)
-                .correctQuantity(itemQuantity)
-                .correctSubtotal(String.format(Locale.US, "%.2f",
-                        Float.parseFloat(expectedTotal) * Float.parseFloat(itemQuantity)));
     }
 }

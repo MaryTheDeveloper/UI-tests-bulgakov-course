@@ -12,17 +12,15 @@ public class WsShoppingCartPage {
     private final SelenideElement quantityInput = $("input.qty-input");
     private final SelenideElement subtotal = $("span.product-subtotal");
 
-    public WsShoppingCartPage correctItemName(String itemName) {
-        productName.shouldHave(text(itemName));
-        return this;
+    public String getItemName() {
+        return productName.getText();
     }
 
-    public WsShoppingCartPage correctQuantity(String itemQuantity) {
-        quantityInput.shouldHave(value(itemQuantity));
-        return this;
+    public String getQuantity() {
+        return quantityInput.getValue();
     }
 
-    public void correctSubtotal(String itemSubtotal) {
-        subtotal.shouldHave(text(itemSubtotal));
+    public String getSubtotal() {
+        return subtotal.getText();
     }
 }

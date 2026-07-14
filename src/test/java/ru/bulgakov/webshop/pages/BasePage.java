@@ -25,8 +25,9 @@ public class BasePage {
         return new WsCategoryPage();
     }
 
-    public void cartQuantityIsCorrect(String itemQuantity) {
+    public BasePage verifyCartQuantity(String itemQuantity) {
         cartQuantity.shouldHave(text("(" + itemQuantity + ")"));
+        return this;
     }
 
     public WsShoppingCartPage openShoppingCart() {
