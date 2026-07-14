@@ -10,6 +10,8 @@ import ru.bulgakov.webshop.steps.AuthSteps;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
 public class CartTest {
@@ -25,7 +27,7 @@ public class CartTest {
     void addToCardTest() {
         String itemQuantity = "2";
         int processorIndex = 0;
-        WsProductCartPage wsProductCartPage = new WsProductCartPage();
+        WsProductCartPage cartPage = new WsProductCartPage();
 
         open(WEB_SHOP_URL, WsWelcomePage.class)
                 .selectComputers()
@@ -37,14 +39,20 @@ public class CartTest {
                 .successNotificationAppeared()
                 .cartQuantityIsCorrect(itemQuantity);
 
-        String itemName = wsProductCartPage.getItemName();
-        String itemPrice = wsProductCartPage.getItemPrice();
+        String itemName = cartPage.getItemName();
+        String expectedTotal = cartPage.getSubtotal();
 
-        wsProductCartPage
+        assertAll(
+                () -> assertEquals(itemName, cartPage.getItemName()),
+                () -> assertEquals(expectedTotal, cartPage.getSubtotal()),
+                () -> assertEquals(itemQuantity, cartPage.getQuantity())
+        );
+
+        cartPage
                 .openShoppingCart()
                 .correctItemName(itemName)
                 .correctQuantity(itemQuantity)
                 .correctSubtotal(String.format(Locale.US, "%.2f",
-                        Float.parseFloat(itemPrice) * Float.parseFloat(itemQuantity)));
+                        Float.parseFloat(expectedTotal) * Float.parseFloat(itemQuantity)));
     }
 }

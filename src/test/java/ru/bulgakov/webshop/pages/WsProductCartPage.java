@@ -13,8 +13,12 @@ public class WsProductCartPage extends BasePage{
     private final SelenideElement quantityInput = $("input.qty-input");
     private final SelenideElement addToCartButton = $("input.add-to-cart-button");
     private final SelenideElement successNotification = $("div.bar-notification.success");
-    private final SelenideElement itemName = $("[itemprop=name]");
-    private final SelenideElement itemPrice = $("[itemprop=price]");
+    private final SelenideElement productName = $("[itemprop=name]");
+    private final SelenideElement subtotal = $("[itemprop=price]");
+
+    public String getItemName() { return productName.getText(); }
+    public String getQuantity() { return quantityInput.getValue(); }
+    public String getSubtotal() { return subtotal.getText(); }
 
     public WsProductCartPage selectProcessor(int processorIndex) {
         optionList.get(0).$$("li input").get(processorIndex).click();
@@ -35,13 +39,5 @@ public class WsProductCartPage extends BasePage{
     public WsProductCartPage successNotificationAppeared() {
         successNotification.shouldBe(visible);
         return this;
-    }
-
-    public String getItemName() {
-        return itemName.getText();
-    }
-
-    public String getItemPrice() {
-        return itemPrice.getText();
     }
 }
