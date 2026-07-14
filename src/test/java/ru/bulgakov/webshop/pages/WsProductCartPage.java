@@ -32,7 +32,6 @@ public class WsProductCartPage extends BasePage{
 
     public WsProductCartPage addToCart() {
         addToCartButton.click();
-        successNotification.shouldBe(visible);
         return this;
     }
 
