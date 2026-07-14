@@ -9,7 +9,6 @@ import ru.bulgakov.webshop.steps.AuthSteps;
 
 import java.util.Locale;
 
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
@@ -25,13 +24,14 @@ public class CartTest {
     @Test
     void addToCardTest() {
         String itemQty = "2";
+        int processorIndex = 0;
         WsProductCartPage wsProductCartPage = new WsProductCartPage();
 
         open(WEB_SHOP_URL, WsWelcomePage.class)
                 .selectComputers()
                 .selectDesktops()
                 .selectItemByIndex(0)
-                .selectSlowProcessor()
+                .selectProcessor(processorIndex)
                 .inputQtyValue(itemQty)
                 .addToCart()
                 .successNotificationAppeared()

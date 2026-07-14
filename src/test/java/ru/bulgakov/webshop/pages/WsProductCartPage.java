@@ -16,8 +16,8 @@ public class WsProductCartPage extends BasePage{
     private final SelenideElement itemName = $("[itemprop=name]");
     private final SelenideElement itemPrice = $("[itemprop=price]");
 
-    public WsProductCartPage selectSlowProcessor() {
-        optionList.get(0).$$("li input").get(0).click();
+    public WsProductCartPage selectProcessor(int processorIndex) {
+        optionList.get(0).$$("li input").get(processorIndex).click();
         return this;
     }
 
