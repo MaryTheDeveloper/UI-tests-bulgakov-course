@@ -30,7 +30,7 @@ public class Math {
         return "Бюджета не хватает! Не хватает: " + (sum - budget);
     }
 
-    public static void canBuyVersionFor(List<Double> priceList, double budget) {
+    public static void canBuyVersionFor(List<Double> priceList, double budget) { //
         double total = 0;
         int count = 0;
         List<Double> sortedPrices = new ArrayList<>(priceList);
@@ -50,6 +50,7 @@ public class Math {
         System.out.println("Не куплено: " + (priceList.size() - count));
     }
 
+    // этот метод, как по мне, более читаемый, но for мне больше нравится, так как там просто идет перебор всех итемов сразу
     public static void canBuyVersionWhile(List<Double> priceList, double budget) {
         double total = 0;
         int count = 0;
