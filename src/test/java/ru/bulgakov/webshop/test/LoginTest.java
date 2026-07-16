@@ -3,6 +3,10 @@ package ru.bulgakov.webshop.test;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import ru.bulgakov.webshop.BaseTest;
+import ru.bulgakov.webshop.pages.BasePage;
 import ru.bulgakov.webshop.pages.WsRegistrationPage;
 import ru.bulgakov.webshop.pages.WsWelcomePage;
 
@@ -10,7 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_REGISTRATION_URL;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
-public class LoginTest {
+public class LoginTest extends BaseTest {
     private static final Faker faker = new Faker();
     private String email;
     private String password;
@@ -42,5 +46,17 @@ public class LoginTest {
                 .checkRememberMe()
                 .submitLogin()
                 .checkUserLoggedIn(email);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/email.csv")
+    void invalidEmailLoginTest(String email) {
+        open(WEB_SHOP_URL, WsWelcomePage.class)
+                .openLogin()
+                .checkLoginPageOpened()
+                .enterEmail(email)
+                .verifyEmailValidationErrorAppear()
+                .submitLogin();
+
     }
 }

@@ -6,10 +6,12 @@ import org.junit.jupiter.api.Test;
 import ru.bulgakov.mentor.pages.DemoQaRegistrationPage;
 import ru.bulgakov.mentor.pages.LavaTopPayingPage;
 import ru.bulgakov.mentor.pages.YandexSearchPage;
+import ru.bulgakov.webshop.BaseTest;
+import ru.bulgakov.webshop.pages.BasePage;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class QaTest {
+public class QaTest extends BaseTest {
 
     private static final String PRACTICE_FORM_URL = "https://demoqa.com/automation-practice-form";
     private static final String YANDEX_URL = "https://ya.ru/";

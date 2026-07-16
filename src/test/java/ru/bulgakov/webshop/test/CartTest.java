@@ -3,6 +3,8 @@ package ru.bulgakov.webshop.test;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.bulgakov.webshop.BaseTest;
+import ru.bulgakov.webshop.pages.BasePage;
 import ru.bulgakov.webshop.pages.WsProductCartPage;
 import ru.bulgakov.webshop.pages.WsShoppingCartPage;
 import ru.bulgakov.webshop.pages.WsWelcomePage;
@@ -15,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
-public class CartTest {
+public class CartTest extends BaseTest {
     private static final Faker faker = new Faker();
     private final AuthSteps authSteps = new AuthSteps();
 
