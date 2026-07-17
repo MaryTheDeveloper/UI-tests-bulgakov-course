@@ -2,6 +2,8 @@ package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.bulgakov.webshop.BaseTest;
 import ru.bulgakov.webshop.pages.BasePage;
@@ -18,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
 public class CartTest extends BaseTest {
-    private static final Faker faker = new Faker();
     private final AuthSteps authSteps = new AuthSteps();
 
     @BeforeEach
@@ -27,7 +28,11 @@ public class CartTest extends BaseTest {
     }
 
     @Test
-    void addToCardTest() {
+    @DisplayName("Добавить 2 компьютера с процессором Slow в корзину и проверить стоимость и количество")
+    @Tag("POSITIVE")
+    @Tag("cart")
+    @Tag("smoke")
+    void addToCartTest() {
         String itemQuantity = "2";
         int processorIndex = 0;
         WsProductCartPage productCartPage = new WsProductCartPage();

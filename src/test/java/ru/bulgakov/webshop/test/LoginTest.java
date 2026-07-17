@@ -1,8 +1,7 @@
 package ru.bulgakov.webshop.test;
 
 import net.datafaker.Faker;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.bulgakov.webshop.BaseTest;
@@ -36,27 +35,40 @@ public class LoginTest extends BaseTest {
         clearBrowserLocalStorage();
     }
 
-    @Test
-    void successLoginTest() {
-        open(WEB_SHOP_URL, WsWelcomePage.class)
-                .openLogin()
-                .checkLoginPageOpened()
-                .enterEmail(email)
-                .enterPassword(password)
-                .checkRememberMe()
-                .submitLogin()
-                .checkUserLoggedIn(email);
+    @Nested
+    class PositiveTest{
+        @Test
+        @DisplayName("Пользователь успешно вошел на сайт")
+        @Tag("POSITIVE")
+        @Tag("smoke")
+        @Tag("login")
+        void successLoginTest() {
+            open(WEB_SHOP_URL, WsWelcomePage.class)
+                    .openLogin()
+                    .checkLoginPageOpened()
+                    .enterEmail(email)
+                    .enterPassword(password)
+                    .checkRememberMe()
+                    .submitLogin()
+                    .checkUserLoggedIn(email);
+        }
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/email.csv")
-    void invalidEmailLoginTest(String email) {
-        open(WEB_SHOP_URL, WsWelcomePage.class)
-                .openLogin()
-                .checkLoginPageOpened()
-                .enterEmail(email)
-                .verifyEmailValidationErrorAppear()
-                .submitLogin();
-
+    @Nested
+    class NegativeTest{
+        @ParameterizedTest
+        @DisplayName("Пользователь не может зайти на сайт с некорректным email")
+        @CsvFileSource(resources = "/email.csv")
+        @Tag("smoke")
+        @Tag("NEGATIVE")
+        @Tag("login")
+        void invalidEmailLoginTest(String email) {
+            open(WEB_SHOP_URL, WsWelcomePage.class)
+                    .openLogin()
+                    .checkLoginPageOpened()
+                    .enterEmail(email)
+                    .verifyEmailValidationErrorAppear()
+                    .submitLogin();
+        }
     }
 }
