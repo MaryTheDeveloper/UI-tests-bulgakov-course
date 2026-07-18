@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class WsWelcomePage {
+public class WsWelcomePage extends BasePage {
 
     private final SelenideElement registrationButton = $("a.ico-register");
     private final SelenideElement logInButton = $("a.ico-login");
