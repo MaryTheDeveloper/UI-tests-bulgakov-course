@@ -3,6 +3,7 @@ package ru.bulgakov.webshop.pages;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class WsLoginPage {
@@ -36,5 +37,10 @@ public class WsLoginPage {
     public WsWelcomePage submitLogin() {
         loginButton.click();
         return new WsWelcomePage();
+    }
+
+    public WsLoginPage verifyEmailValidationErrorAppear() {
+        $("span.field-validation-error").shouldBe(visible);
+        return this;
     }
 }
