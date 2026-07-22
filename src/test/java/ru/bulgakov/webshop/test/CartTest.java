@@ -1,5 +1,6 @@
 package ru.bulgakov.webshop.test;
 
+import io.qameta.allure.*;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +16,13 @@ import ru.bulgakov.webshop.steps.AuthSteps;
 import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
+@Epic("Покупка товаров")
+@Feature("Добавление товаров в корзину")
 public class CartTest extends BaseTest {
     private final AuthSteps authSteps = new AuthSteps();
 
@@ -29,6 +33,9 @@ public class CartTest extends BaseTest {
 
     @Test
     @DisplayName("Добавить 2 компьютера с процессором Slow в корзину и проверить стоимость и количество")
+    @Severity(CRITICAL)
+    @Owner("Maria S")
+    @Link(name = "TASK-20", url = "https://jira/ticket/TASK-20")
     @Tag("POSITIVE")
     @Tag("cart")
     @Tag("smoke")

@@ -12,16 +12,19 @@ import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static ru.bulgakov.webshop.config.Config.WEB_SHOP_URL;
 
+@Epic("Авторизация")
+@Feature("Регистрация")
 public class RegistrationTest extends BaseTest {
     private static final Faker faker = new Faker();
 
     @Test
-    @Owner("123")
+    @Severity(CRITICAL)
+    @Owner("Maria S")
+    @Link(name = "TASK-10", url = "https://jira/ticket/TASK-10")
     @Tag("POSITIVE")
     @Tag("registration")
     @Tag("smoke")
     @Tag("registration")
-    @Severity(CRITICAL)
     @Epic("Авторизация")
     @Feature("Регистрация")
     @Story("Регистрация нового пользователя")

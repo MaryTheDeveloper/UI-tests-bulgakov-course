@@ -31,9 +31,4 @@ public class BaseTest {
         AttachManager.getBrowserConsoleLogs();
         AttachManager.getPageSource();
     }
-
-//    @BeforeEach
-//    void closeDriver() {
-//        closeWebDriver();
-//    }
 }

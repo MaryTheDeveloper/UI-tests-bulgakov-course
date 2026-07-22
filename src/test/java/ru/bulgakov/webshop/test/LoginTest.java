@@ -1,5 +1,6 @@
 package ru.bulgakov.webshop.test;
 
+import io.qameta.allure.*;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,8 +12,11 @@ import ru.bulgakov.webshop.pages.WsRegistrationPage;
 import ru.bulgakov.webshop.pages.WsWelcomePage;
 
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static ru.bulgakov.webshop.config.Config.*;
 
+@Epic("Авторизация")
+@Feature("Вход в аккаунт")
 public class LoginTest extends BaseTest {
     private static final Faker faker = new Faker();
     private String email;
@@ -32,10 +36,16 @@ public class LoginTest extends BaseTest {
                             email,
                             password)
                     .checkUserLoggedIn(email);
+
+            clearBrowserCookies();
+            clearBrowserLocalStorage();
         }
 
         @Test
-        @DisplayName("Пользователь успешно вошел на сайт")
+        @DisplayName("Успешная авторизация пользователя")
+        @Severity(CRITICAL)
+        @Owner("Maria S")
+        @Link(name = "TASK-220", url = "https://jira/ticket/TASK-220")
         @Tag("POSITIVE")
         @Tag("smoke")
         @Tag("login")
@@ -52,7 +62,9 @@ public class LoginTest extends BaseTest {
     }
 
     @ParameterizedTest(name = "Авторизация с некорректным email: {0}")
-    //@DisplayName("Авторизация с некорректным email: {0}")
+    @Severity(CRITICAL)
+    @Owner("Maria S")
+    @Link(name = "TASK-86", url = "https://jira/ticket/TASK-86")
     @CsvFileSource(resources = "/email.csv")
     @Tag("smoke")
     @Tag("NEGATIVE")

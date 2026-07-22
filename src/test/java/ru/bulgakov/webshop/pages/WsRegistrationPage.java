@@ -21,7 +21,7 @@ public class WsRegistrationPage {
     private final SelenideElement resultText = $("div.result");
     private final ElementsCollection headerLinks = $$("div.header-links ul li a");
 
-    @Step("Регистрация пользователя с first name: {firstName}, last name: {lastName}, password: {password}")
+    @Step("Регистрация пользователя с Именем: {firstName}, Фамилией: {lastName}, Паролем: {password}")
     public WsRegistrationPage register(String firstName, String lastName, String email, String password) {
         selectMaleGender()
                 .enterFirstName(firstName)
