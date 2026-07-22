@@ -2,6 +2,7 @@ package ru.bulgakov.webshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -16,33 +17,35 @@ public class WsProductCartPage extends BasePage {
     private final SelenideElement productName = $("[itemprop=name]");
     private final SelenideElement productPrice = $("[itemprop=price]");
 
+    @Step("Получить название товара")
     public String getItemName() {
         return productName.getText();
     }
 
-    public String getQuantity() {
-        return quantityInput.getValue();
-    }
-
+    @Step("Получить стоимость товара")
     public String getProductPrice() {
         return productPrice.getText();
     }
 
+    @Step("Выбрать процессор")
     public WsProductCartPage selectProcessor(int processorIndex) {
         optionList.get(0).$$("li input").get(processorIndex).click();
         return this;
     }
 
+    @Step("Ввести количество товаров")
     public WsProductCartPage setQuantity(String quantity) {
         quantityInput.setValue(quantity);
         return this;
     }
 
+    @Step("Добавить товар в корзину")
     public WsProductCartPage addToCart() {
         addToCartButton.click();
         return this;
     }
 
+    @Step("Уведомление об успешном добавлении товара в корзину")
     public WsProductCartPage successNotificationAppeared() {
         successNotification.shouldBe(visible);
         return this;

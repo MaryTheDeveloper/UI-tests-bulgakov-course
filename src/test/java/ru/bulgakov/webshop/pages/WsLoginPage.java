@@ -32,6 +32,7 @@ public class WsLoginPage {
         return this;
     }
 
+    @Step("Поставить галочку 'Запомнить меня'")
     public  WsLoginPage checkRememberMe() {
         rememberMeCheckbox.click();
         return this;
