@@ -10,8 +10,8 @@ public class FruitsList {
         List<String> fruitsList = new ArrayList<>(Arrays
                 .asList("Яблоко", "Банан", "Апельсин", "Мандарин", "Груша"));
 
-        for (int i = 0; i < 5; i++) {
-            System.out.println( (i + 1) + ". " + fruitsList.get(i));
+        for (int i = 0; i < fruitsList.size(); i++) {
+            System.out.println((i + 1) + ". " + fruitsList.get(i));
         }
     }
 

@@ -2,7 +2,7 @@ package homework.lesson1;
 
 import java.util.*;
 
-public class Math {
+public class BudgetCalculator {
     public static void main(String[] args) {
         List<Double> prices = new ArrayList<>(Arrays.asList(120.23, 200.03, 1009.98, 2.90, 375.00));
         double budget = 200.03;
