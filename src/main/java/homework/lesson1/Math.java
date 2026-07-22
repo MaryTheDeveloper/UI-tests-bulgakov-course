@@ -5,7 +5,7 @@ import java.util.*;
 public class Math {
     public static void main(String[] args) {
         List<Double> prices = new ArrayList<>(Arrays.asList(120.23, 200.03, 1009.98, 2.90, 375.00));
-        double budget = 5000;
+        double budget = 200.03;
         double sum = sumOfPriceList(prices);
 
         System.out.println(sum);
@@ -33,15 +33,12 @@ public class Math {
     public static void canBuyVersionFor(List<Double> priceList, double budget) { //
         double total = 0;
         int count = 0;
-        List<Double> sortedPrices = new ArrayList<>(priceList);
-        Collections.sort(sortedPrices);
+        int index = 0;
 
-        for (double price : sortedPrices) {
-            if (budget - price >= 0) {
+        for (double price : priceList) {
+            if (total + price <= budget) {
                 total += price;
                 count++;
-            } else {
-                break;
             }
         }
 
@@ -50,24 +47,25 @@ public class Math {
         System.out.println("Не куплено: " + (priceList.size() - count));
     }
 
-    // этот метод, как по мне, более читаемый, но for мне больше нравится, так как там просто идет перебор всех итемов сразу
     public static void canBuyVersionWhile(List<Double> priceList, double budget) {
         double total = 0;
-        int count = 0;
-        int notBuyedCount = 0;
+        int index = 0;
+        int boughtCount = 0;
+        int notBoughtCount = 0;
         double balance = budget;
 
-        while (count < priceList.size()) {
-            if (balance - priceList.get(count) > 0) {
-                total += priceList.get(count);
-                balance -= priceList.get(count);
+        while (boughtCount < priceList.size()) {
+            if (balance - priceList.get(boughtCount) >= 0) {
+                total += priceList.get(boughtCount);
+                balance -= priceList.get(boughtCount);
+                index++;
             } else {
-                notBuyedCount++;
+                notBoughtCount++;
             }
-            count++;
+            boughtCount++;
         }
-        System.out.println("Куплено: " + (count - notBuyedCount) + " товара на сумму " + total);
+        System.out.println("Куплено: " + index + " товара на сумму " + total);
         System.out.println("Остаток бюджета: " + (budget - total));
-        System.out.println("Не куплено: " + (notBuyedCount));
+        System.out.println("Не куплено: " + (notBoughtCount));
     }
 }
