@@ -29,10 +29,26 @@ dependencies {
     testImplementation "io.qameta.allure:allure-selenide:$allureVersion"
     testImplementation 'com.codeborne:selenide:7.16.2'
     testImplementation 'net.datafaker:datafaker:2.7.0'
+    testImplementation 'org.aeonbits.owner:owner:1.0.12'
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
 }
 
 test {
     useJUnitPlatform()
+    systemProperty 'file.encoding', 'UTF-8'
+    if (System.getProperty('browser')) {
+        systemProperty 'browser', System.getProperty('browser')
+    }
+    if (System.getProperty('run')) {
+        systemProperty 'run', System.getProperty('run')
+    }
 }
 
 task positiveTest(type: Test) {

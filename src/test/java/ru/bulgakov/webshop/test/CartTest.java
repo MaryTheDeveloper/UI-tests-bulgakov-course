@@ -45,6 +45,10 @@ public class CartTest extends BaseTest {
         WsProductCartPage productCartPage = new WsProductCartPage();
         WsShoppingCartPage shoppingCartPage = new WsShoppingCartPage();
 
+
+        String property = System.getProperty("run", "local");
+        System.out.println(property);
+
         open(WEB_SHOP_URL, WsWelcomePage.class)
                 .selectComputers()
                 .selectDesktops()
