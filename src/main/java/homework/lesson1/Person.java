@@ -12,6 +12,7 @@ public class Person {
         this.age = age;
     }
 
+    //вообще у меня так уже было, мне менять ничего не пришлось по задаче 2 из дз для java урок 2
     public String introduce() {
         return "Привет, меня зовут " + firstName + " " + lastName + ". Мне " + age + " лет.";
     }
